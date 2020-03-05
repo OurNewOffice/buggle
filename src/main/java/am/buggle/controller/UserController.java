@@ -5,8 +5,7 @@ import am.buggle.dto.AuthenticationResponse;
 import am.buggle.dto.UserDto;
 import am.buggle.model.User;
 import am.buggle.repository.UserRepository;
-import am.buggle.util.JwtUtil;
-import io.jsonwebtoken.impl.DefaultClaims;
+import am.buggle.security.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +22,10 @@ public class UserController {
     @Autowired
     private PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
-    private final JwtUtil jwtTokenUtil;
+    private final JwtTokenUtil jwtTokenUtil;
 
     public UserController(UserRepository userRepository,
-                          JwtUtil jwtTokenUtil) {
+                          JwtTokenUtil jwtTokenUtil) {
         this.userRepository = userRepository;
         this.jwtTokenUtil = jwtTokenUtil;
     }
@@ -37,7 +36,7 @@ public class UserController {
         User byPhone = userRepository.findByPhone(authenticationRequest.getPhone());
 
         if (byPhone!=null && passwordEncoder.matches(authenticationRequest.getPassword(), byPhone.getPassword())){
-            String token = jwtTokenUtil.generateToken(byPhone.getPhone(),new DefaultClaims());
+            String token = jwtTokenUtil.generateToken(byPhone.getPhone());
             return ResponseEntity.status(HttpStatus.OK).body(AuthenticationResponse.builder()
                     .token(token)
                     .userDto(UserDto.builder()
@@ -52,7 +51,5 @@ public class UserController {
         }
         else return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
-
-
 
 }
