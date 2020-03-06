@@ -4,9 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.repository.cdi.Eager;
 
 import javax.persistence.*;
+
+/**
+ * @author Seda Ghazaryan
+ * @author Ara Hovhannisyan
+ * @class Car
+ */
 
 @Data
 @AllArgsConstructor

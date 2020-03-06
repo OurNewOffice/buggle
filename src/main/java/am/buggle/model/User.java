@@ -1,13 +1,22 @@
 package am.buggle.model;
 
 import am.buggle.enums.UserType;
-import lombok.*;
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+
+/**
+ * @author Seda Ghazaryan
+ * @author Ara Hovhannisyan
+ * @class User
+ */
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,6 +36,7 @@ public class User {
     private String phone;
 
     @Column
+    @JsonIgnore
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)

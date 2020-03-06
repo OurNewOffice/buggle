@@ -1,15 +1,23 @@
-package am.buggle.dto;
+package am.buggle.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * @author Seda Ghazaryan
+ * @author Ara Hovhannisyan
+ * @class AuthToken
+ */
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AuthenticationResponse {
+public class AuthToken {
+
     private String token;
-    private UserDto userDto;
+    private User user;
+
 }
